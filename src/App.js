@@ -1,4 +1,4 @@
-import logo from './logo.svg';
+
 import './App.css';
 import { Image, Button, Rate } from "antd";
 
@@ -13,6 +13,7 @@ function App() {
       <Button>Submit</Button>
 
       <Rate />
+      <h2>Hello</h2>
     </div>
   );
 }
