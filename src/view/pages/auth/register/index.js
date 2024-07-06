@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography, Input, Button, Divider, Form } from 'antd';
+import { Typography, Input, Button, Divider, Form, notification } from 'antd';
 import './index.css';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../../../services/firebase/firebase';
@@ -10,26 +10,43 @@ class Register extends React.Component{
     constructor(){
         super();
         this.state={
-            firstName: '',
-            lastName: '',
-            headline: '',
-            email: '',
-            password: ''
+            loading: false,
+            firstName: "",
+            lastName: "",
+            headline: "",
+            email: "",
+            password: ""
         }
 
         this.handleRegister = this.handleRegister.bind(this);
     }
 
-    handleChangeInput = e => {
-        const { name, value } = e.target;
-        this.setState({
-            [ name ]: value
-        }) 
+    handleChangeInput = value => {
+        this.setState(value);
     }
 
-    handleRegister() {
-        const { email, password } = this.state;
-        createUserWithEmailAndPassword(auth, email, password);
+    async handleRegister() {
+        const { email, password, firstName, lastName } = this.state;
+        this.setState({
+            loading: true
+        });
+
+        try {
+            const response = await createUserWithEmailAndPassword(auth, email, password); 
+            notification.success({
+                message: "Success Registration",
+                description: `Welcome dear ${firstName} ${lastName}`
+            })
+        } catch (error) {
+            notification.error({
+                message: "Wrong Registration",
+                description: `Check your information`
+            })
+        } finally {
+            this.setState({
+                loading: false
+            });
+        }
     }
 
     render(){
@@ -39,56 +56,55 @@ class Register extends React.Component{
                     Register
                 </Title>
 
-                <div>
-                    <Input 
-                        type="text"
-                        name="firstName"
-                        placeholder="First Name"
-                        onChange={this.handleChangeInput}
-                    />
-                </div>
+                <Form layout="vertical" onValuesChange={this.handleChangeInput}> 
+                     <Form.Item label="First Name" name="firstName">
+                        <Input 
+                            type="text"
+                            placeholder="First Name"
+                        />
+                    </Form.Item>
+    
+                    <Form.Item label="Last Name" name="lastName">
+                        <Input 
+                            type="text"
+                            placeholder="Last Name"
+                        />
+                    </Form.Item>
+    
+                    <Form.Item label="HeadLine" name="headline">
+                        <Input 
+                            type="text"
+                            placeholder="Headline"
+                        />
+                    </Form.Item>
+    
+                    <Form.Item label="Email" name="email">
+                        <Input 
+                            type="email"
+                            placeholder="Email"
+                        />
+                    </Form.Item>
+    
+                    <Form.Item label="Password" name="password">
+                        <Input 
+                            type="password"
+                            placeholder="Password"
+                        />
+                    </Form.Item>
 
-                <div>
-                    <Input 
-                        type="text"
-                        name="lastName"
-                        placeholder="Last Name"
-                        onChange={this.handleChangeInput}
-                    />
-                </div>
+                    <Divider/>
 
-                <div>
-                    <Input 
-                        type="text"
-                        name="headline"
-                        placeholder="Headline"
-                        onChange={this.handleChangeInput}
-                    />
-                </div>
+                    <Button 
+                        type="primary" 
+                        onClick={this.handleRegister}
+                        loading={this.state.loading}
+                    >
+                        Register
+                    </Button>
+ 
+                 </Form>
 
-                <div>
-                    <Input 
-                        type="email"
-                        name="email"
-                        placeholder="Email"
-                        onChange={this.handleChangeInput}
-                    />
-                </div>
-
-                <div>
-                    <Input 
-                        type="password"
-                        name="password"
-                        placeholder="Password"
-                        onChange={this.handleChangeInput}
-                    />
-                </div>
-
-                <Divider/>
-
-                <Button type="primary" onClick={this.handleRegister}>
-                    Register
-                </Button>
+             
             </div>
         )
     }
