@@ -1,8 +1,7 @@
 import React from 'react';
 import { Typography, Input, Button, Divider, Form, notification } from 'antd';
-import './index.css';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../../../../services/firebase/firebase';
+import { auth, db, setDoc, getDoc, doc } from '../../../../services/firebase/firebase';
 
 const { Title } = Typography;
 
@@ -26,13 +25,22 @@ class Register extends React.Component{
     }
 
     async handleRegister() {
-        const { email, password, firstName, lastName } = this.state;
+        const { email, password, firstName, lastName, headline } = this.state;
         this.setState({
             loading: true
         });
 
         try {
-            const response = await createUserWithEmailAndPassword(auth, email, password); 
+            const response = await createUserWithEmailAndPassword(auth, email, password);
+            const uid = response.user.uid;
+            const createDoc = doc(db, "registerUsers", uid);
+            setDoc(createDoc, {
+                firstName,
+                lastName,
+                headline
+            })
+
+            
             notification.success({
                 message: "Success Registration",
                 description: `Welcome dear ${firstName} ${lastName}`
@@ -51,7 +59,7 @@ class Register extends React.Component{
 
     render(){
         return (
-            <div className="auth_register_container">
+            <div className="auth_container">
                 <Title level={2}>
                     Register
                 </Title>
