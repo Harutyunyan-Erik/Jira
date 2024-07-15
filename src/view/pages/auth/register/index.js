@@ -37,7 +37,8 @@ class Register extends React.Component{
             setDoc(createDoc, {
                 firstName,
                 lastName,
-                headline
+                headline,
+                email
             })
 
             
