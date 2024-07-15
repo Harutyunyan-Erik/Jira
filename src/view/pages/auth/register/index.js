@@ -1,7 +1,7 @@
 import React from 'react';
 import { Typography, Input, Button, Divider, Form, notification } from 'antd';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth, db, setDoc, getDoc, doc } from '../../../../services/firebase/firebase';
+import { auth, db, setDoc, doc } from '../../../../services/firebase/firebase';
 
 const { Title } = Typography;
 
