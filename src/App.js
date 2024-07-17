@@ -1,10 +1,32 @@
 import Header from './view/components/global/header';
 import React from 'react';
-import Auth from './view/pages/auth';
+import Login from './view/pages/auth/login';
+import Register from './view/pages/auth/register';
 import LoadingWrapper from './view/components/shared/LoadingWrapper';
 import { db, auth, doc, getDoc, onAuthStateChanged } from './services/firebase/firebase';
+import Cabinet from './view/pages/cabinet';
+import MainLayout from './view/layout/mainLayout';
+import CabinetLayout from './view/layout/cabinetLayout';
+import { 
+  Route,
+  RouterProvider,
+  createBrowserRouter,
+  createRoutesFromElements,
+ } from 'react-router-dom';
 import './App.css';
 
+const route = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/" element={<MainLayout />}>
+      <Route path="login" element={<Login />} />
+      <Route path="register" element={<Register />} />
+
+      <Route path="/cabinet" element={<CabinetLayout />}> 
+        <Route path="/cabinet" element={<Cabinet />} />
+      </Route>
+    </Route>
+  )
+);
 
 class App extends React.Component{
   constructor(){
@@ -57,13 +79,7 @@ class App extends React.Component{
 
     return(
       <LoadingWrapper loading={loading} fullScreen>
-        <div className="App">
-          <Header 
-            isAuth={isAuth} 
-            userProfileInfo={userProfileInfo} 
-          />
-          <Auth />
-        </div>
+        <RouterProvider router={route} />
       </LoadingWrapper>
     )
   }
