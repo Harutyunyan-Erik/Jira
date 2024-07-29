@@ -1,9 +1,17 @@
+import { useState } from 'react';
 import { Input, Avatar, Button, Divider } from 'antd';
 import { hover } from '@testing-library/user-event/dist/hover';
 import { PlusOutlined } from '@ant-design/icons';
+import CreateIssueModal from '../../shared/CreateIssueModal';
 import './index.css';
 
 const SubHeader = () => {
+    const [ modalVisible, setModalVisible ] = useState(false);
+
+    const handleOpenModal = () => {
+        setModalVisible(true);
+    }
+
     return (
         <div className="subHeader">
             <Input.Search className="search_input" placeholder="Search"/>
@@ -49,9 +57,17 @@ const SubHeader = () => {
 
             <Divider type="vertical" />
 
-            <Button type="primary" icon={ <PlusOutlined /> }>
+            <Button 
+                type="primary" icon={ <PlusOutlined /> }
+                onClick={handleOpenModal}
+            >
                 CREATE ISSUE
             </Button>
+
+            <CreateIssueModal 
+                visible={modalVisible}
+                setVisible={setModalVisible}
+            />
         </div>
     )
 }
