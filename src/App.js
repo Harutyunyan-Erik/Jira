@@ -7,12 +7,12 @@ import { AuthContextProvider } from './context/AuthContext';
 import {  
   Route, 
   RouterProvider,
-  createHashRouter, 
+  createBrowserRouter, 
   createRoutesFromElements,
 } from 'react-router-dom';
 import './App.css';
 
-const route = createHashRouter(
+const route = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<MainLayout />}>
         <Route path="login" element={<Login />}/>

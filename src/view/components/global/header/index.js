@@ -5,7 +5,7 @@ import { AuthContext } from '../../../../context/AuthContext';
 import { Link } from 'react-router-dom';
 import './index.css';
 
-const MainHeader = () => { 
+const Header = () => { 
     const { isAuth, setIsAuth, userProfileInfo } = useContext(AuthContext);
 
     return (
@@ -33,4 +33,4 @@ const MainHeader = () => {
     )
 };
 
-export default MainHeader;
+export default Header;
