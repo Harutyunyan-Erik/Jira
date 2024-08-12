@@ -15,13 +15,13 @@ const issueTypes = [
 
 const priority = [
     {
-        value: "high",
-        label: "High"
-    },
-    {
         value: "highest",
         label: "Highest"
     }, 
+    {
+        value: "high",
+        label: "High"
+    },
     {
         value: "medium",
         label: "Medium"
@@ -36,4 +36,11 @@ const priority = [
     }
 ]
 
-export { issueTypes, priority }
+const taksStatus = {
+    TODO: "0",
+    IN_PROGRESS: "1",
+    TEST: "2",
+    DONE: "3"
+}
+
+export { issueTypes, priority, taksStatus }
