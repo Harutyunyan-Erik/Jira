@@ -11,47 +11,45 @@ import './index.css';
 const { Title, Text } = Typography;
 
 const Register = () => {
-    const [ loading, setLoading ] = useState(false);
     const [ form ] = Form.useForm();
     const navigate = useNavigate();
+    const [ loading, setLoading ] = useState(false);
 
     const handleRegister = async (values) => {
         setLoading(true);
-
         try {
             const { email, password, ...restData } = values;
             const response = await createUserWithEmailAndPassword(auth, email, password);
             const uid = response.user.uid;
             const createDoc = doc(db, 'registerUsers', uid);
-
             await setDoc(createDoc, {
                 email, ...restData
-            })            
-
-            navigate("/login");
-        } catch (error) {
+            });
+            navigate('/login');
+        }catch{
             notification.error({
                 message: 'Wrong Registration',
                 description: `Ooooops :(`
             })
-        } finally {
-            setLoading(false); 
+        }finally{
+            setLoading(false);
         }
     }
+
     return (
         <AuthWrapper coverImg={registerCoverImg}>
             <Title level={2}>
                 Register
             </Title>
 
-            <Form onFinish={handleRegister} form={form} layout="vertical">
-                <Form.Item 
-                    label="First Name" 
+            <Form form={form} onFinish={handleRegister} layout="vertical">
+                <Form.Item
                     name="firstName"
+                    label="First Name"
                     rules={[
                         {
                             required: true,
-                            message: "First Name is required!."
+                            message: 'First Name is required!'
                         }
                     ]}
                 >
@@ -62,12 +60,12 @@ const Register = () => {
                 </Form.Item>
 
                 <Form.Item 
-                    label="Last Name" 
                     name="lastName"
+                    label="Last Name" 
                     rules={[
                         {
                             required: true,
-                            message: "Last Name is required!."
+                            message: 'Last Name is required!'
                         }
                     ]}
                 >
@@ -77,13 +75,13 @@ const Register = () => {
                     />
                 </Form.Item>
 
-                <Form.Item l
-                    abel="Headline" 
+                <Form.Item 
                     name="headline"
+                    label="Headline" 
                     rules={[
                         {
                             required: true,
-                            message: "Headline is required!."
+                            message: 'Headline is required!'
                         }
                     ]}
                 >
@@ -94,12 +92,12 @@ const Register = () => {
                 </Form.Item>
 
                 <Form.Item 
-                    label="Email" 
                     name="email"
+                    label="Email" 
                     rules={[
                         {
                             required: true,
-                            message: "Email is required!."
+                            message: 'Email is required!'
                         }
                     ]}
                 >
@@ -110,12 +108,12 @@ const Register = () => {
                 </Form.Item>
 
                 <Form.Item 
-                    label="Password" 
                     name="password"
+                    label="Password" 
                     rules={[
                         {
                             required: true,
-                            message: "Password is required!."
+                            message: 'Password is required!'
                         }
                     ]}
                 >
@@ -132,7 +130,7 @@ const Register = () => {
                             Sign In
                         </Link>
                     </Text>
-                    
+                
                     <Button
                         type="primary" 
                         loading={loading}
@@ -144,6 +142,15 @@ const Register = () => {
             </Form>
         </AuthWrapper>
     )
-}
+};
 
 export default Register;
+
+
+
+
+
+
+
+
+

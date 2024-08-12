@@ -1,6 +1,7 @@
 import React from 'react';
 
-class Cabinet extends React.Component{
+
+class Cabinet extends React.Component {
     render() {
         return (
             <div>
@@ -8,7 +9,6 @@ class Cabinet extends React.Component{
             </div>
         )
     }
-    
-}
+};
 
 export default Cabinet;

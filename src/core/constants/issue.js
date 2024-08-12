@@ -1,46 +1,49 @@
 const issueTypes = [
     {
-        value: "bug",
-        label: "Bug"
+        value: 'bug',
+        label: 'Bug',
     },
     {
-        value: "task",
-        label: "Task"
+        value: 'task',
+        label: 'Task',
     },
     {
-        value: "story",
-        label: "Story"
-    }
+        value: 'story',
+        label: 'Story',
+    },
 ];
 
 const priority = [
     {
-        value: "highest",
-        label: "Highest"
-    }, 
-    {
-        value: "high",
-        label: "High"
+        value: 'high',
+        label: 'High'
     },
     {
-        value: "medium",
-        label: "Medium"
-    }, 
+        value: 'highest',
+        label: 'Highest'
+    },
     {
-        value: "low",
-        label: "low"
-    }, 
+        value: 'medium',
+        label: 'Medium'
+    },
     {
-        value: "lowest",
-        label: "Lowest"
+        value: 'low',
+        label: 'Low'
+    },
+    {
+        value: 'lowest',
+        label: 'Lowest'
     }
-]
+];
 
-const taksStatus = {
-    TODO: "0",
-    IN_PROGRESS: "1",
-    TEST: "2",
-    DONE: "3"
+const taskStatus = { 
+    TODO: '0',
+    IN_PROGRESS: '1',
+    TEST: '2',
+    DONE: '3'
 }
 
-export { issueTypes, priority, taksStatus }
+export {
+    issueTypes, priority, taskStatus
+}
+

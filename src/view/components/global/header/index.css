@@ -1,4 +1,4 @@
-.main_header{
+.main_header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -7,6 +7,6 @@
 }
 
 .main_header h3 {
-    color: #fff;
     margin: 0;
+    color: #fff;
 }

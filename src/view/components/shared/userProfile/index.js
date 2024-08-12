@@ -71,3 +71,4 @@ const UserProfile = ({ userProfileInfo, setIsAuth }) => {
 };
 
 export default UserProfile;
+

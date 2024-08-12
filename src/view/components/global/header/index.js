@@ -1,14 +1,13 @@
 import { useContext } from 'react';
-import { AuthContext } from '../../../../core/context/AuthContext';
 import { Layout, Button, Typography, Space } from 'antd';
 import UserProfile from '../../shared/UserProfile';
+import { AuthContext } from '../../../../context/AuthContext';
 import { Link } from 'react-router-dom';
 import './index.css';
 
 const Header = () => { 
-    const { isAuth, setIsAuth, userProfileInfo } = useContext(AuthContext)
-    const values = useContext(AuthContext);
-   
+    const { isAuth, setIsAuth, userProfileInfo } = useContext(AuthContext);
+
     return (
         <Layout.Header className="main_header">
             <Link to="/">

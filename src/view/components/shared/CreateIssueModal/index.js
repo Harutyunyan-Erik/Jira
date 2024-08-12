@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
-import { Modal, Form, Input, Select, Divider, notification } from 'antd';
-import { issueTypes, priority, taksStatus } from '../../../../core/constants/issue';
+import { useState } from 'react';
+import { Modal, Form, Input, Select, notification } from 'antd';
+import { issueTypes, priority, taskStatus } from '../../../../core/constants/issue';
 import Editor from '../Editor';
-import { db, doc, setDoc } from '../../../../services/firebase/firebase';
+import { doc, setDoc, db } from '../../../../services/firebase/firebase';
 
-const CreateIssueModal = ( {visible, setVisible, users } ) => {
+const CreateIssueModal = ({ visible, setVisible, users }) => { //render
     const [ form ] = Form.useForm();
+   
     const [confirmLoading, setConfirmLoading] = useState(false);
-        
+
     const handleCloseModal = () => {
         setVisible(false);
         form.resetFields();
@@ -17,35 +18,33 @@ const CreateIssueModal = ( {visible, setVisible, users } ) => {
         setConfirmLoading(true);
 
         const taskDataModel = {
-            status: taksStatus.TODO,
+            status: taskStatus.TODO,
             ...values
         }
-
-        console.log(taskDataModel);
-        try {
-            const createDoc = doc(db, "issue", `${ Date.now() }`);
-            setDoc(createDoc, taskDataModel);
+     
+        try{
+            const createDoc = doc(db, 'issue', `${Date.now()}`);
+            await setDoc(createDoc, taskDataModel);
 
             notification.success({
-                message: "Your task has been created",
-            })
+                message: 'Your task has been created',
+            });
 
             setVisible(false);
             form.resetFields();
-        } catch (error) {
+        }catch(error) {
             notification.error({
-                message: "Error oops :( ",
-            })
-
-        } finally {
+                message: 'Error ooops :(',
+            });
+        }finally{
             setConfirmLoading(false);
         }
     }
 
     return (
         <Modal
-            title="Create Issue"
-            okText="Create Issue"
+            title="Create issue"
+            okText="Create issue"
             centered
             open={visible}
             width={800}
@@ -57,7 +56,7 @@ const CreateIssueModal = ( {visible, setVisible, users } ) => {
                 <Form.Item
                     name="issueType"
                     label="Issue Type"
-                    rules={[{required: true, message: "Please selecet Issue Type!"}]}
+                    rules={[{required: true, message: 'Please Select Issue Type!'}]}
                 >
                     <Select 
                         showSearch
@@ -66,34 +65,28 @@ const CreateIssueModal = ( {visible, setVisible, users } ) => {
                     />
                 </Form.Item>
 
-                <Divider />
-
                 <Form.Item
                     name="shortSummary"
                     label="Short Summary"
-                    rules={[{required: true, message: "Please input Short Summary!"}]}
+                    rules={[{required: true, message: 'Please Input Issue Short Summary!'}]}
                 >
-                    <Input 
-                        placeholder="Short Summary"
-                    />
-            </Form.Item>
-          
-                <Divider />
+                  <Input 
+                    placeholder="Short Summary"
+                  />
+                </Form.Item>
 
-                <Form.Item
+                <Form.Item 
                     name="description"
                     label="Description"
-                    rules={[{required: true, message: "Please input Description!"}]}
+                    rules={[{required: true, message: 'Please Input Description!'}]}
                 >
                     <Editor />
                 </Form.Item>
 
-                <Divider />
-
                 <Form.Item
                     name="reporter"
                     label="Reporter"
-                    rules={[{required: true, message: "Please select Reporter!"}]}
+                    rules={[{required: true, message: 'Please Select Reporter!'}]}
                 >
                     <Select 
                         showSearch
@@ -105,7 +98,7 @@ const CreateIssueModal = ( {visible, setVisible, users } ) => {
                 <Form.Item
                     name="assignees"
                     label="Assignees"
-                    rules={[{required: true, message: "Please select Assignees!"}]}
+                    rules={[{required: true, message: 'Please Select Assignees!'}]}
                 >
                     <Select 
                         showSearch
@@ -117,7 +110,7 @@ const CreateIssueModal = ( {visible, setVisible, users } ) => {
                 <Form.Item
                     name="priority"
                     label="Priority"
-                    rules={[{required: true, message: "Please select Priority!"}]}
+                    rules={[{required: true, message: 'Please Select Priority!'}]}
                 >
                     <Select 
                         showSearch
@@ -125,7 +118,7 @@ const CreateIssueModal = ( {visible, setVisible, users } ) => {
                         options={priority}
                     />
                 </Form.Item>
-            </Form>
+            </Form>   
         </Modal>
     )
 };
