@@ -9,30 +9,33 @@ import {
 
 const ISSUE_OPTIONS = {
     bug: {
-        icon: <BugOutlined style={{color: "#e44d42"}} />
+        icon: <BugOutlined style={{color: "#e44d42"}} />,
+        label: "Bug"
     },
     story: {
-        icon: <CheckSquareOutlined style={{color: "#65ba43"}} />
+        icon: <CheckSquareOutlined style={{color: "#65ba43"}} />,
+        label: "Story"
     },
     task: {
-        icon: <FlagOutlined style={{color: "#4fade6"}}/>
+        icon: <FlagOutlined style={{color: "#4fade6"}}/>,
+        label: "Task"
     }
 };
 
 const issueTypes = [
     {
         value: 'bug',
-        label: 'Bug',
+        label: ISSUE_OPTIONS.bug.label,
         icon: ISSUE_OPTIONS.bug.icon
     },
     {
         value: 'task',
-        label: 'Task',
+        label: ISSUE_OPTIONS.task.label,
         icon: ISSUE_OPTIONS.task.icon
     },
     {
         value: 'story',
-        label: 'Story',
+        label: ISSUE_OPTIONS.story.label,
         icon: ISSUE_OPTIONS.story.icon
     },
 ];

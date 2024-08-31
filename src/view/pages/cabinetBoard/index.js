@@ -1,17 +1,19 @@
-import { useEffect, useContext } from 'react';
+import { useEffect, useContext, useState } from 'react';
+import EditIssueModal from '../../components/shared/EditIssueModal';
 import { PRIORITY_OPTION, ISSUE_OPTIONS } from '../../../core/constants/issue';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import { db, updateDoc, doc } from '../../../services/firebase/firebase';
 import LoadingWrapper from '../../components/shared/LoadingWrapper';
 import { Typography, Flex } from 'antd';
-import './index.css';
 import { AuthContext } from '../../../context/AuthContext';
+import './index.css';
 
 const { Title, Text } = Typography;
 
 
 const CabinetBoard = () => {
-    const { columns, issuesLoading, handleGetIssues, setColumns } = useContext(AuthContext)
+    const { columns, issuesLoading, handleGetIssues, setColumns } = useContext(AuthContext);
+    const [ selectedIssueData, setSelectedIssueData ] = useState(null);
 
     useEffect(() => {
         handleGetIssues();
@@ -88,7 +90,6 @@ const CabinetBoard = () => {
                                             {column.items.length}
                                         </Title>
                                 </div>
-
                                     <div>
                                         <Droppable droppableId={columnId} key={columnId}> 
                                             {(provided, snapshot) => {
@@ -113,6 +114,7 @@ const CabinetBoard = () => {
                                                                             (provided, snapshot) => {
                                                                                 return (
                                                                                     <div
+                                                                                        onClick = {() => setSelectedIssueData(item)}
                                                                                         className="issue_card_container"
                                                                                         ref={provided.innerRef}
                                                                                         {...provided.draggableProps}
@@ -156,6 +158,19 @@ const CabinetBoard = () => {
                     }
                 </DragDropContext>
             </LoadingWrapper>
+
+            {
+                Boolean(selectedIssueData)
+                &&
+                (
+                    <EditIssueModal 
+                    issueData={selectedIssueData}
+                    visible={Boolean(selectedIssueData)}
+                    onClose={() => setSelectedIssueData(null)}
+                />
+                )
+            }
+
         </div>
     )
 };
