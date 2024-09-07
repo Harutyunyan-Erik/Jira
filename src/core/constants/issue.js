@@ -1,68 +1,73 @@
-import { 
+import {
     BugOutlined, 
     FlagOutlined, 
     ArrowUpOutlined, 
     ArrowDownOutlined, 
-    CheckSquareOutlined, 
-
+    CheckSquareOutlined,
 } from '@ant-design/icons';
 
-const ISSUE_OPTIONS = {
+const ISSUE_OPTION = {
     bug: {
-        icon: <BugOutlined style={{color: "#e44d42"}} />
-    },
-    story: {
-        icon: <CheckSquareOutlined style={{color: "#65ba43"}} />
+        icon: <BugOutlined style={{color: '#e44d42'}}/>,
+        label: 'Bug'
     },
     task: {
-        icon: <FlagOutlined style={{color: "#4fade6"}}/>
+        icon: <CheckSquareOutlined style={{color: '#4fade6'}}/>,
+        label: 'Task'
+    },
+    story: {
+        icon: <FlagOutlined style={{color: '#65ba43'}}/>,
+        label: 'story'
     }
-};
+}
 
 const issueTypes = [
     {
         value: 'bug',
-        label: 'Bug',
-        icon: ISSUE_OPTIONS.bug.icon
+        label: ISSUE_OPTION.bug.label,
+        icon: ISSUE_OPTION.bug.icon
     },
     {
         value: 'task',
-        label: 'Task',
-        icon: ISSUE_OPTIONS.task.icon
+        label: ISSUE_OPTION.task.label,
+        icon: ISSUE_OPTION.task.icon
     },
     {
         value: 'story',
-        label: 'Story',
-        icon: ISSUE_OPTIONS.story.icon
+        label: ISSUE_OPTION.story.label,
+        icon: ISSUE_OPTION.story.icon
     },
 ];
+
+
 const PRIORITY_OPTION = {
     high: {
-        icon: <ArrowUpOutlined style={{color: "red"}} />
+        icon: <ArrowUpOutlined style={{color: 'red'}} />
     },
     highest: {
-        icon: <ArrowUpOutlined style={{color: "red"}} />
+        icon: <ArrowUpOutlined style={{color: 'red'}} />
     },
     medium: {
-        icon: <ArrowUpOutlined style={{color: "orange"}}/>
+        icon: <ArrowUpOutlined style={{color: 'orange'}}/>
     },
     low: {
-        icon: <ArrowDownOutlined style={{color: "green"}}/>
+        icon: <ArrowDownOutlined style={{color: 'green'}}/>
     },
     lowest: {
-        icon: <ArrowDownOutlined style={{color: "green"}}/>
+        icon: <ArrowDownOutlined style={{color: 'green'}}/>
     }
 }
+
 const priority = [
-    {
-        value: 'highest',
-        label: 'Highest',
-        icon: PRIORITY_OPTION.highest.icon
-    },
     {
         value: 'high',
         label: 'High',
         icon: PRIORITY_OPTION.high.icon
+    },
+    {
+        value: 'highest',
+        label: 'Highest',
+        icon: PRIORITY_OPTION.highest.icon
     },
     {
         value: 'medium',
@@ -98,9 +103,8 @@ const taskStatus = {
         key: '3',
         title: 'Done'
     },
-};
+}
 
 export {
-    issueTypes, priority, taskStatus, PRIORITY_OPTION, ISSUE_OPTIONS
-};
-
+    issueTypes, priority, taskStatus, ISSUE_OPTION, PRIORITY_OPTION
+}
